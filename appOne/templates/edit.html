@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+</head>
+<body>
+    <h1>Edit TV Show {{EditShow.Title}}</h1>
+    {% if messages %}
+    <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+    <form action='/shows/{{EditShow.id}}/update' method='post'>
+        {% csrf_token %}
+        <p>Title: <input type='text' name='title' id='' value='{{EditShow.Title}}'></p><br>
+        <p>Network: <input type='text' name='network' id='' value='{{EditShow.Network}}'></p><br>
+        <p>Release Date:<input type='date' name='release_date' value='{{EditShow.Release_Date}}'></p><br>
+        <h5>Description</h5><br>
+        <textarea name='description' value='{{EditShow.Description}}' rows='15' cols='100'></textarea>
+        <button type='submit' value='Edit'>Edit</submit>
+    </form>
+</body>
+</html>
